@@ -9,18 +9,18 @@
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v5.0.1/dist/aframe-extras.min.js"></script>
   </head>
   <body>
-    <a-scene class="fullscreen" canvas="" inspector="url:https://unpkg.com/aframe-inspector@0.5.x/dist/aframe-inspector.min.js" keyboard-shortcuts="enterVR:true;exitVR:true;resetSensor:true" screenshot="width:4096;height:2048" vr-mode-ui="enabled:true" auto-enter-vr="display:GearVR;enabled:true">>
+    <a-scene>
 
-      <a-assets>
-        <a-mixin id="checkpoint"></a-mixin>
-        <a-mixin id="checkpoint-hovered" color="#6CEEB5"></a-mixin>
-      </a-assets>
+        <a-assets>
+          <a-mixin id="checkpoint"></a-mixin>
+          <a-mixin id="checkpoint-hovered" color="#6CEEB5"></a-mixin>
+        </a-assets>
 
               <!-- Environment -->
-     <a-entity environment="preset: forest"></a-entity>
+        <a-entity environment="preset: forest"></a-entity>
 
               <!-- Player -->
-     <a-entity
+          <a-entity
             camera=""
             active="false"
             position=".934 1.6 0"
@@ -30,26 +30,27 @@
             velocity="0 0 0"
             mouse-controls=""
             rotation=""
-            look-controls="">
+            took-controls="">
 
-            <a-entity cursor=""
-            position="0 0 -1"
-            geometry="primitive:ring;radiusInner:0.02;radiusOuter:0.03"
-            material="color:#CCC;shader:flat"
-            rotation="0 0 0"
-            scale="1 1 1"
-            visible="true"
-            raycaster="">
+              <a-entity
+              cursor=""
+              position="0 0 -1"
+              geometry="primitive:ring;radiusInner:0.02;radiusOuter:0.03"
+              material="color:#CCC;shader:flat"
+              rotation="0 0 0"
+              scale="1 1 1"
+              visible="true"
+              raycaster="">
+              </a-entity>
           </a-entity>
-    </a-entity>
 
 
               <!-- Checkpoints -->
-    <a-entity position="1 0 1" rotation="0 0" scale="1 1 1" visible="true">
-        <a-cylinder checkpoint="offset: 0 1.6 0" radius="1" height="0.1" position="0 0 -9.763" color="#39BB82" rotation="0 0" scale="1 1 1" visible="true" material="color: #39BB82" geometry="primitive: cylinder; radius: 1; height: 0.1"></a-cylinder>
-        <a-cylinder checkpoint="offset: 0 1.6 0" radius="1" height="0.1" position="6.312 0" color="#39BB82" rotation="0 0" scale="1 1 1" visible="true" material="color: #39BB82" geometry="primitive: cylinder; radius: 1; height: 0.1"></a-cylinder>
-        <a-cylinder checkpoint="offset: 0 1.6 0" radius="1" height="0.1" position="-7.376 0" color="#39BB82" rotation="0 0" scale="1 1 1" visible="true" material="color: #39BB82" geometry="primitive: cylinder; radius: 1; height: 0.1"></a-cylinder>
-    </a-entity>
+              <a-entity position="1 0 1" rotation="0 0" scale="1 1 1" visible="true">
+                <a-cylinder checkpoint="offset: 0 1.6 0" radius="1" height="0.1" position="0 0 -9.763" color="#39BB82" rotation="0 0" scale="1 1 1" visible="true" material="color: #39BB82" geometry="primitive: cylinder; radius: 1; height: 0.1"></a-cylinder>
+                <a-cylinder checkpoint="offset: 0 1.6 0" radius="1" height="0.1" position="6.312 0" color="#39BB82" rotation="0 0" scale="1 1 1" visible="true" material="color: #39BB82" geometry="primitive: cylinder; radius: 1; height: 0.1"></a-cylinder>
+                <a-cylinder checkpoint="offset: 0 1.6 0" radius="1" height="0.1" position="-7.376 0" color="#39BB82" rotation="0 0" scale="1 1 1" visible="true" material="color: #39BB82" geometry="primitive: cylinder; radius: 1; height: 0.1"></a-cylinder>
+              </a-entity>
 
     </a-scene>
   </body>
