@@ -8,7 +8,6 @@
 	  <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v5.0.1/dist/aframe-extras.js"></script>
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.3.0/dist/aframe-physics-system.min.js"></script>
-    <script async="" src="https://www.google-analytics.com/analytics.js"></script><script src="../aframe-extras.js"></script>
   </head>
   <body>
     <a-scene>
@@ -22,8 +21,7 @@
         <a-entity environment="preset: forest"></a-entity>
 
               <!-- Player -->
-            <a-entity
-                  camera=""
+            <a-entity camera
                   active="false"
                   position=".934 1.6 0"
                   universal-controls="movementControls: checkpoint"
@@ -31,7 +29,7 @@
                   visible="true"
                   velocity="0 0 0"
                   mouse-controls=""
-                  rotation=""
+                  movementControls=""
                   look-controls="">
 
               <a-entity
