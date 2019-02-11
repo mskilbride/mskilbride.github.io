@@ -14,24 +14,26 @@
      <a-entity environment="preset: forest"></a-entity>
 
               <!-- Player -->
-     <a-entity camera="userHeight: 1.6"
+     <a-entity camera="userHeight: 3"
             universal-controls="movementControls: checkpoint"
-            checkpoint-controls="mode: teleport">
+            checkpoint-controls="mode: animate"
+            visible="true"
+            velocity="0 0 0">
     </a-entity>
 
+            <!-- Cursor -->
     <a-entity cursor
               position="0 0 -1"
               geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03;"
               material="color: #CCC; shader: flat;">
-  </a-entity>
+    </a-entity>
 
               <!-- Checkpoints -->
-  <a-entity position="1 0 1">
-    <a-cylinder checkpoint="offset: 0 1.6 0" radius="1" height="0.1" position="0 0 -5.2" color="#39BB82"></a-cylinder>
-    <a-cylinder checkpoint="offset: 0 1.6 0" radius="1" height="0.1" position="3 0 0" color="#39BB82"></a-cylinder>
-    <a-cylinder checkpoint="offset: 0 1.6 0" radius="1" height="0.1" position="-3 0 0" color="#39BB82"></a-cylinder>
+  <a-entity position="1 0 1" rotation="0 0 0" scale="1 1 1" visible="true">
+    <a-cylinder checkpoint="offset:0 1.6 0" radius="1" height="0.1" position="0 0 -5.2" color="#39BB82" rotation="0 0 0" scale="1 1 1" visible="true" material="color:#39BB82" geometry="primitive:cylinder;radius:1;height:0.1"></a-cylinder>
+    <a-cylinder checkpoint="offset:0 1.6 0" radius="1" height="0.1" position="3 0 0" color="#39BB82" rotation="0 0 0" scale="1 1 1" visible="true" material="color:#39BB82" geometry="primitive:cylinder;radius:1;height:0.1"></a-cylinder>
+    <a-cylinder checkpoint="offset:0 1.6 0" radius="1" height="0.1" position="-3 0 0" color="#39BB82" rotation="0 0 0" scale="1 1 1" visible="true" material="color:#39BB82" geometry="primitive:cylinder;radius:1;height:0.1"></a-cylinder>
   </a-entity>
-
 
     </a-scene>
   </body>
