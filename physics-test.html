@@ -15,8 +15,10 @@
     <a-scene>
 
     <!-- Player -->
-        <a-entity camera="userHeight: 1.6"
+        <a-entity camera
+        position="0 4 0"
         universal-controls
+        movementControls
         kinematic-body
         position="0 0.1 0">
         </a-entity>
@@ -28,7 +30,7 @@
         <a-box color="blue" static-body position="0 0.5 -5" width="3" height="1" depth="1"></a-box>
 
     <!-- Dynamic box -->
-        <a-box color="green" dynamic-body position=".336 2.831 -5.089" width="1" height="1" depth="1"></a-box>
+        <a-box color="green" dynamic-body position="3 3 3" width="1" height="1" depth="1"></a-box>
 
 
     </a-scene>
