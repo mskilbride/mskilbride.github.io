@@ -3,12 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title>Forest Test</title>
-    <meta name="description" content="Forest Test">
+    <meta name="description" content="Physics-Test">
     <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v5.0.1/dist/aframe-extras.js"></script>
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.3.0/dist/aframe-physics-system.js"></script>
   </head>
   <body>
+
     <a-scene physics="debug: true">
 
     <!-- Player -->
@@ -20,27 +21,15 @@
           </a-entity>
 
     <!-- Ground -->
-        <a-plane static-body></a-plane>
-
+        <a-plane color="red" static-body></a-plane>
 
     <!-- Immovable box -->
-        <a-box static-body position="0 0.5 -5" width="3" height="1" depth="1"></a-box>
+        <a-box color="blue" static-body position="0 0.5 -5" width="3" height="1" depth="1"></a-box>
 
     <!-- Dynamic box -->
-        <a-box dynamic-body position="5 0.5 0" width="1" height="1" depth="1"></a-box>
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <a-box color="green" dynamic-body position="5 0.5 0" width="1" height="1" depth="1"></a-box>
 
 
     </a-scene>
+  </body>
+</html>
