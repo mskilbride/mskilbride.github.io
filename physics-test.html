@@ -9,22 +9,20 @@
     <meta name="description" content="Physics-Test">
     <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v5.0.1/dist/aframe-extras.js"></script>
-    <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.3.0/dist/aframe-physics-system.js"></script>
   </head>
   <body>
 
     <a-scene>
 
     <!-- Player -->
-        <a-entity camera="userHeight: 1.6" look-controls position="0 0.1 0">
-          <a-entity cursor
-                  position="0 0 -0.5"
-                  geometry="primitive: circle; radius: 0.01; segments: 4;"
-                  material="color: #FF4444; shader: flat"></a-entity>
-          </a-entity>
+        <a-entity camera="userHeight: 1.6"
+        universal-controls
+        kinematic-body
+        position="0 0.1 0">
+        </a-entity>
 
     <!-- Ground -->
-        <a-plane color="red" static-body="sphereRadius: NaN" material="" geometry="" velocity="" position="" rotation="-89.15853545810253 -179.98953472019195 -0.010313240312354819"></a-plane>
+        <a-grid static-body></a-grid>
 
     <!-- Immovable box -->
         <a-box color="blue" static-body position="0 0.5 -5" width="3" height="1" depth="1"></a-box>
