@@ -8,7 +8,8 @@
     <title>Physics Test</title>
     <meta name="description" content="Physics-Test">
     <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
-    <script src="extras\aframe-extras.js"></script>
+    <script src="extras\dist\aframe-extras.js"></script>
+    <script src="physics\dist\aframe-physics-system.js"></script>
   </head>
   <body>
 
@@ -16,19 +17,27 @@
 
     <!-- Player -->
         <a-camera
-        position="0 1 0"
-        universal-controls
-        kinematic-body>
-      </a-camera>
+          universal-controls
+          kinematic-body
+          position="0 5 0">
+        </a-camera>
 
     <!-- Ground -->
         <a-grid static-body></a-grid>
 
     <!-- Immovable box -->
-        <a-box color="blue" static-body position="0 0.5 -5" width="3" height="1" depth="1"></a-box>
+        <a-box color="blue"
+          position="2 1 -5"
+          width="2" height="1" depth="1"
+          static-body>
+        </a-box>
 
     <!-- Dynamic box -->
-        <a-box color="yellow" dynamic-body position="4.122 .507 -5.373" width="1" height="1" depth="1"></a-box>
+        <a-sphere color="yellow"
+          position="5 3 -5"
+          width="1" height="1" depth="1"
+          dynamic-body >
+        </a-sphere>
 
 
     </a-scene>
