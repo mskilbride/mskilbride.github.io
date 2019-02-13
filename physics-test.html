@@ -19,24 +19,33 @@
         <a-camera
           universal-controls
           kinematic-body
-          position="0 5 0">
+          position="0 2 0"
+          static-body>
         </a-camera>
 
     <!-- Ground -->
         <a-grid static-body></a-grid>
 
-    <!-- Immovable box -->
+    <!-- Immovable boxes -->
         <a-box color="blue"
           position="2 1 -5"
+          width="2" height="1" depth="1"
+          rotation="0 0 14"
+          static-body>
+        </a-box>
+
+        <a-box color="blue"
+          position="-1.5 1 -5"
+          rotation="0 0 90"
           width="2" height="1" depth="1"
           static-body>
         </a-box>
 
     <!-- Dynamic box -->
         <a-sphere color="yellow"
-          position="5 3 -5"
+          position="2.01081 2.88802 -5.05798"
           width="1" height="1" depth="1"
-          dynamic-body >
+          dynamic-body>
         </a-sphere>
 
 
