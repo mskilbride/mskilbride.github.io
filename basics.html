@@ -8,6 +8,11 @@
   </head>
   <body>
     <a-scene>
+      <a-assets>
+        <img id="boxTexture" src="https://i.imgur.com/mYmmbrp.jpg">
+        <img id="skyTexture" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
+        <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
+  </a-assets>
       <a-box
             position="-2 2 -3"
             rotation="0 0 0"
@@ -19,7 +24,7 @@
             position="0 2 -3"
             rotation="0 0 0"
             color="yellow">
-            <a-animation attribute="rotation" begin="mouseenter" repeat="2" to="0 360 0"></a-animation>
+            <a-animation attribute="position" to="0 2.4 -3" direction="alternate" dur="2000" repeat="indefinite"></a-animation>
       </a-sphere>
 
       <a-box
@@ -35,7 +40,7 @@
 
       <a-light type="point" color="white" position="5 0 0"></a-light>
 
-      <a-plane position="0 0 0" rotation="-90 0 0" width="20" height="20" color="red"></a-plane>
+      <a-plane src="#groundTexture" position="0 0 0" rotation="-90 0 0" width="20" height="20" repeat="10 10"></a-plane>
       <a-sky color="#ECECEC"></a-sky>
     </a-scene>
   </body>
