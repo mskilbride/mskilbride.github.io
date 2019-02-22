@@ -2,7 +2,7 @@
 
 This respository exists to live-test A-Frame environments and other test assets. Each asset folder contains additional features in A-Frame for use in the space. 
 
-  - Environment contains the js files for the predetermind environment used in index.html
+  - Environment contains the js files for the predetermined environment used in index.html
   
   - Extras includes certain mouse, look, gamepad, and VR-controller assets, used in index.html
   
