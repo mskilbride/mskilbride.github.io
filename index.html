@@ -5,40 +5,44 @@
     <title>Forest Test</title>
     <meta name="description" content="Forest Test">
     <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
-    <script src="environment\dist\aframe-environment-component.min.js"></script>
-    <script src="extras\dist\aframe-extras.js"></script>
-    <script src="physics\dist\aframe-physics-system.js"></script>
+    <script src="widgets\dist\ui-widgets.min.js"></script> <!-- Loads buttons, dials and other widgets -->
+    <script src="cursor-components\dist\aframe-mouse-cursor-component.min.js"></script>
+    <script src="environment\dist\aframe-environment-component.min.js"></script> <!-- Loads predetermined forest background -->
+    <script src="extras\dist\aframe-extras.js"></script> <!-- Loads movement contols, mouse controls, and checkpoint system -->
+    <script src="physics\dist\aframe-physics-system.js"></script> <!-- Loads physics system *has not worked yet in this scene* -->
   </head>
   <body>
-    <a-scene physics="debug: true">
+    <a-scene>
 
         <a-assets>
           <a-mixin id="checkpoint"></a-mixin>
           <a-mixin id="checkpoint-hovered" color="#6CEEB5"></a-mixin>
+          <a-mixin id="beveled-square" geometry="primitive: cone; radiusTop: 0.15; radiusBottom: 0.19; height: 0.02; segmentsRadial: 4; segmentsHeight: 1" rotation="0 45 0"></a-mixin>
+          <a-mixin id="square" geometry="primitive: box; width: 0.18; height: 0.025; depth: 0.18;" position="0 0.02 0"></a-mixin>
+          <a-mixin id="blue" material="color: #1E2768;"></a-mixin>
+          <a-mixin id="darkgreen" material="color: #22FF90;"></a-mixin>
+          <a-mixin id="yellow" material="color: #FFF88E;"></a-mixin>
+          <a-mixin id="offset" position="0 0.01 0"></a-mixin>
         </a-assets>
 
               <!-- Environment -->
-        <!-- <a-entity environment="preset: forest" ground="flat"></a-entity> -->
+        <a-entity environment="preset: forest"></a-entity>
+        <!-- <a-grid static-body></a-grid> -->
 
               <!-- Player -->
-            <a-entity camera
-                  active="false"
-                  position=".934 1.6 0"
-                  movementControls="checkpoint"
-                  checkpoint-controls="mode: teleport"
-                  mouse-controls=""
-                  look-controls="pointerLockEnabled: true">
-
-              <a-entity
-                  cursor="downEvents:  ;  fuse:  true;  fuseTimeout:  1000;  upEvents:  "
-                  position="0 0 -1"
-                  geometry="primitive:ring;radiusInner:0.02;radiusOuter:0.03"
-                  material="color:#CCC;shader:flat"
-                  rotation="0 0 0"
-                  scale="1 1 1"
-                  visible="true"
-                  raycaster="">
-              </a-entity>
+            <a-entity id="Player"position="0 1.6 0" wasd-controls="acceleration: 50" checkpoint-controls="mode: teleport" rotation="">
+                <a-entity id="Camera" camera="userHeight: 1.6" look-controls="">
+                  <a-entity id="Cursor"
+                    cursor="downEvents: ; fuse: true; fuseTimeout: 1000; upEvents: "
+                    position="0 0 -1"
+                    geometry="primitive:ring;radiusInner:0.02;radiusOuter:0.03"
+                    material="color:#CCC;shader:flat"
+                    rotation="0 0 0"
+                    scale="1 1 1"
+                    visible="true"
+                    raycaster="">
+                  </a-entity>
+                </a-entity>
           </a-entity>
 
 
@@ -49,6 +53,25 @@
                 <a-cylinder checkpoint="offset:0 1.6 0" radius="1" height="0.1" position="-3 0 0" color="#39BB82"></a-cylinder>
               </a-entity>
 
+              <a-box color="brown" position="5.5 0.6 1">
+                  <!-- <a-entity id="mybutton" ui-button="base:beveled-square, blue; top:square, darkgreen; pressed:yellow, offset" position="0 0.529 0"></a-entity> -->
+              </a-box>
+
+              <a-entity id="mybutton" ui-button="" position="5.116 1.231 1.028" rotation="45 -89 0" scale="1 1 1" visible="true" cursor-listener="">
+                <a-entity geometry="primitive:cylinder;radius:0.1;height:0.025;segmentsHeight:1" position="0 0.02 0" material="color:#960960" rotation="0 0 0" scale="1 1 1" visible="true"></a-entity>
+                <a-entity geometry="primitive:cone;radiusTop:0.12;radiusBottom:0.15;height:0.02;segmentsHeight:1" material="color:#618EFF" position="0 0 0" rotation="0 0 0" scale="1 1 1" visible="true"></a-entity>
+              </a-entity>
+
     </a-scene>
+
+<!-- Script for button pushing -->
+    <script>
+    var mybutton = document.querySelector('#mybutton');
+    mybutton.addEventListener('pressed', function () {
+    // do stuff here.
+    });
+    </script>
+
+<!-- cursor="downEvents: ; fuse: true; fuseTimeout: 1000; upEvents: " -->
   </body>
 </html>
