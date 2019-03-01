@@ -107,12 +107,12 @@
     // When the button is pressed, change the cube to a random color.
     var mybutton = document.querySelector('#mybutton');
     mybutton.addEventListener('pressed', function () {
-      //var randomHexColor = Math.floor(Math.random() * 0xffffff).toString(16);
-      //targetCube.setAttribute('material', {
-        //color: '#' + randomHexColor
-      var audio = new Audio('birds.mp3');
-      audio.play;
-    //  });
+      var randomHexColor = Math.floor(Math.random() * 0xffffff).toString(16);
+      targetCube.setAttribute('material', {
+        color: '#' + randomHexColor
+      // var audio = new Audio('birds.mp3');
+      // audio.play;
+     });
     });
     </script>
 
