@@ -12,7 +12,7 @@
     <script src="physics\dist\aframe-physics-system.js"></script> <!-- Loads physics system *has not worked yet in this scene* -->
   </head>
   <body>
-    
+
     <script>
       //set up these arrays outside the function so that init and tick can both access it
       //use these arrays to hold previous quantities
@@ -51,7 +51,7 @@
           }
       });
   </script>
-    
+
     <a-scene>
 
         <a-assets>
@@ -93,7 +93,7 @@
                 <a-cylinder checkpoint="offset:0 1.6 0" radius="1" height="0.1" position="-3 0 0" color="#39BB82"></a-cylinder>
               </a-entity>
 
-              <a-box color="red" position="5.5 0.6 1">
+              <a-box id="cube" color="red" position="5.5 0.6 1">
                 <a-entity id="mybutton" ui-button="" position="-0.5 .6 -0.016" rotation="45 -89 0" scale="1 1 1" visible="true" cursor-listener=""></a-entity>
               </a-box>
 
@@ -101,9 +101,16 @@
 
 <!-- Script for button pushing -->
     <script>
+    // Setting the cube as the target for button being pressed
+    var targetCube = document.querySelector('#cube');
+
+    // When the button is pressed, change the cube to a random color.
     var mybutton = document.querySelector('#mybutton');
     mybutton.addEventListener('pressed', function () {
-    // do stuff here.
+      var randomHexColor = Math.floor(Math.random() * 0xffffff).toString(16);
+      targetCube.setAttribute('material', {
+        color: '#' + randomHexColor
+      });
     });
     </script>
 
