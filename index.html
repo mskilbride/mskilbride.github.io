@@ -10,46 +10,48 @@
     <script src="environment\dist\aframe-environment-component.min.js"></script> <!-- Loads predetermined forest background -->
     <script src="extras\dist\aframe-extras.js"></script> <!-- Loads movement contols, mouse controls, and checkpoint system -->
     <script src="physics\dist\aframe-physics-system.js"></script> <!-- Loads physics system *has not worked yet in this scene* -->
+    <script src="teleport-controls\dist\aframe-teleport-controls.js"></script>
+    <script src="main.js"></script>
   </head>
   <body>
 
     <script>
-      //set up these arrays outside the function so that init and tick can both access it
-      //use these arrays to hold previous quantities
-      rotationArray = []; //use y value
-      posArray = [];      //use x value as y value should remain constant
-      AFRAME.registerComponent('rotation-reader', {
-          init: function () {
-              //when the page loads do this
-              firstRotation = document.querySelector('#Camera').getAttribute('rotation'); //initial value
-              rotationArray.push(Number(firstRotation.y)); //get Number value of y and add to array (if you store the object it'll change)
-              firstPos = document.querySelector('#Player').getAttribute('position'); //initial value
-              posArray.push(Number(firstPos.x)); //add Number value of x to array (if you do it without Number() it'll change and always = current value
-          },
-          tick: function () {
-              var currentRotation = document.querySelector('#Camera').getAttribute('rotation');
-              var currentPos = document.querySelector('#Player').getAttribute('position');
-              if (rotationArray[rotationArray.length -1] != Number(currentRotation.y)){
-                  //if the camera angle has changed log it in the array this way we keep the array smaller
-                  rotationArray.push(Number(currentRotation.y));
-                  //and maybe do something else
-                  //since there was camera movement check if there has been teleporting
-                  if (posArray[posArray.length -1] != Number(currentPos.x)) {
-                      //if the person x position has changed lot it in the array
-                      posArray.push(Number(currentPos.x));
-                      //and maybe try to dynamically set the teleport discs
-                  }
-              }
-              //use this with the chrome console to see what's going on as you move around
-              console.log("Current camera y value is:   " + currentRotation.y);
-              console.log("Initial camera y value was:  " + rotationArray[0]);
-              console.log("Total camera y positions is: " + rotationArray.length);
-              console.log("The camera array: " + rotationArray);
-              console.log("The current person position: " + document.querySelector('#Player').getAttribute('position').x + ", " + document.querySelector('#Player').getAttribute('position').y + ", " + document.querySelector('#Player').getAttribute('position').z);
-              console.log("Total person x positions is: " + posArray.length);
-              console.log("The person array: " + posArray);
-          }
-      });
+      // //set up these arrays outside the function so that init and tick can both access it
+      // //use these arrays to hold previous quantities
+      // rotationArray = []; //use y value
+      // posArray = [];      //use x value as y value should remain constant
+      // AFRAME.registerComponent('rotation-reader', {
+      //     init: function () {
+      //         //when the page loads do this
+      //         firstRotation = document.querySelector('#Camera').getAttribute('rotation'); //initial value
+      //         rotationArray.push(Number(firstRotation.y)); //get Number value of y and add to array (if you store the object it'll change)
+      //         firstPos = document.querySelector('#Player').getAttribute('position'); //initial value
+      //         posArray.push(Number(firstPos.x)); //add Number value of x to array (if you do it without Number() it'll change and always = current value
+      //     },
+      //     tick: function () {
+      //         var currentRotation = document.querySelector('#Camera').getAttribute('rotation');
+      //         var currentPos = document.querySelector('#Player').getAttribute('position');
+      //         if (rotationArray[rotationArray.length -1] != Number(currentRotation.y)){
+      //             //if the camera angle has changed log it in the array this way we keep the array smaller
+      //             rotationArray.push(Number(currentRotation.y));
+      //             //and maybe do something else
+      //             //since there was camera movement check if there has been teleporting
+      //             if (posArray[posArray.length -1] != Number(currentPos.x)) {
+      //                 //if the person x position has changed lot it in the array
+      //                 posArray.push(Number(currentPos.x));
+      //                 //and maybe try to dynamically set the teleport discs
+      //             }
+      //         }
+      //         //use this with the chrome console to see what's going on as you move around
+      //         console.log("Current camera y value is:   " + currentRotation.y);
+      //         console.log("Initial camera y value was:  " + rotationArray[0]);
+      //         console.log("Total camera y positions is: " + rotationArray.length);
+      //         console.log("The camera array: " + rotationArray);
+      //         console.log("The current person position: " + document.querySelector('#Player').getAttribute('position').x + ", " + document.querySelector('#Player').getAttribute('position').y + ", " + document.querySelector('#Player').getAttribute('position').z);
+      //         console.log("Total person x positions is: " + posArray.length);
+      //         console.log("The person array: " + posArray);
+      //     }
+      // });
   </script>
 
     <a-scene>
@@ -66,19 +68,20 @@
         </a-assets>
 
               <!-- Environment -->
-        <a-entity environment="preset: forest"></a-entity>
+        <a-entity environment="preset: forest; shadow: true; ground: hills;"></a-entity>
         <!-- <a-grid static-body></a-grid> -->
 
               <!-- Player -->
-            <a-entity id="Player" position="0 1.6 0" movement-controls="controls: checkpoint" checkpoint-controls="mode: animate" rotation="">
+            <a-entity id="Player" position="0 1.6 0" rotation="">
+              <!-- <a-entity rotation-reader></a-entity> -->
                 <a-entity id="Camera" camera mouse-cursor="" look-controls="pointerLockEnabled: true">
                   <a-entity id="Cursor"
+                    touch-listener
+                    teleport-controls="teleportOrigin: #Camera; startEvents:starttouch; endEvents:endtouch; curveShootingSpeed:15; hitCylinderRadius:1"
                     cursor="downEvents: ; fuse: false; upEvents: "
                     position="0 0 -1"
                     geometry="primitive:ring;radiusInner:0.02;radiusOuter:0.03"
                     material="color:#CCC;shader:flat"
-                    rotation="0 0 0"
-                    scale="1 1 1"
                     visible="true"
                     raycaster="">
                   </a-entity>
@@ -99,7 +102,6 @@
 
     </a-scene>
 
-<!-- Script for button pushing -->
     <script>
     // Setting the cube as the target for button being pressed
     var targetCube = document.querySelector('#cube');
