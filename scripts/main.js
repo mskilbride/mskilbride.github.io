@@ -1,3 +1,5 @@
+
+// Teleporting script. Touch-listener
 AFRAME.registerComponent('touch-listener', {
   init: function () {
     var targetEl = this.el;
