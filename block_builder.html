@@ -23,8 +23,8 @@
   <a-sky id="background" src="#skyTexture" theta-length="90" radius="30"></a-sky>
   <a-cylinder id="ground" src="#ground" radius="30" height="0.1"></a-cylinder>
 
-  <a-entity id="teleHand" hand-controls="left" teleport-controls="type: parabolic; collisionEntities: [mixin='voxel'], #ground"></a-entity>
-  <a-entity id="blockHand" hand-controls="right" controller-cursor intersection-spawn="event: click; mixin: voxel"></a-entity>
+  <a-entity id="teleHand" vive-controls="left" teleport-controls="type: parabolic; collisionEntities: [mixin='voxel'], #ground"></a-entity>
+  <a-entity id="blockHand" vive-controls="right" laser-controls intersection-spawn="event: click; mixin: voxel"></a-entity>
 
   <a-entity mixin="voxel" position="-1 0 -2"></a-entity>
   <a-entity mixin="voxel" position="0 0 -2"></a-entity>
@@ -50,7 +50,37 @@
       // Add to the scene with `appendChild`.
       this.appendChild(newVoxelEl);
     });
+
+    AFRAME.registerComponent('intersection-spawn', {
+      schema: {
+        default: '',
+        parse: AFRAME.utils.styleParser.parse
+      },
+
+      init: function () {
+        const data = this.data;
+        const el = this.el;
+
+        el.addEventListener(data.event, evt => {
+          // Create element.
+          const spawnEl = document.createElement('a-entity');
+
+          // Snap intersection point to grid and offset from center.
+          spawnEl.setAttribute('position', evt.detail.intersection.point);
+
+          // Set components and properties.
+          Object.keys(data).forEach(name => {
+            if (name === 'event') { return; }
+            AFRAME.utils.entity.setComponentProperty(spawnEl, name, data[name]);
+          });
+
+          // Append to scene.
+          el.sceneEl.appendChild(spawnEl);
+        });
+      }
+    });
     </script>
+
 
 
 </a-scene>
