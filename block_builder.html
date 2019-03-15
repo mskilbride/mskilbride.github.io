@@ -17,14 +17,14 @@
   <a-assets>
     <img id="ground" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
     <img id="skyTexture" src="https://cdn.aframe.io/a-painter/images/sky.jpg">
-    <a-mixin id="voxel" geometry="primitive: box; height: 0.5; width: 0.5; depth: 0.5" material="shader: standard" random-color snap="offset: 0.25 0.25 0.25; snap: 0.5 0.5 0.5"></a-mixin>
+    <a-mixin id="voxel" geometry="primitive: box; height: 0.2; width: 0.2; depth: 0.2" material="shader: standard" random-color snap="offset: 0.25 0.25 0.25; snap: 0.5 0.5 0.5"></a-mixin>
   </a-assets>
 
   <a-sky id="background" src="#skyTexture" theta-length="90" radius="30"></a-sky>
   <a-cylinder id="ground" src="#ground" radius="30" height="0.1"></a-cylinder>
 
-  <a-entity id="teleHand" hand-controls="left" teleport-controls="type: parabolic; collisionEntities: [mixin='voxel'], #ground"></a-entity>
-  <a-entity id="blockHand" hand-controls="right" laser-controls intersection-spawn="event: click; mixin: voxel"></a-entity>
+  <a-entity id="teleHand" laser-controls="hand: left" teleport-controls="type: parabolic; collisionEntities: [mixin='voxel'], #ground"></a-entity>
+  <a-entity id="blockHand" laser-controls="hand: right" intersection-spawn="event: click; mixin: voxel"></a-entity>
 
   <a-entity mixin="voxel" position="-1 0 -2"></a-entity>
   <a-entity mixin="voxel" position="0 0 -2"></a-entity>
@@ -32,7 +32,7 @@
   <a-entity mixin="voxel" position="1 0 -2"></a-entity>
 
     <a-camera id="Camera" position="0 1.6 0">
-        <a-cursor id="Cursor" intersection-spawn="event: click; mixin: voxel"></a-cursor>
+<!--         <a-cursor id="Cursor" intersection-spawn="event: click; mixin: voxel"></a-cursor> -->
     </a-camera>
 
     <script>
@@ -81,7 +81,7 @@
     });
     </script>
 
-
+<!-- hand-controls="right" laser-controls -->
 
 </a-scene>
 
