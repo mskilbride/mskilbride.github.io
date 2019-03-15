@@ -23,8 +23,8 @@
   <a-sky id="background" src="#skyTexture" theta-length="90" radius="30"></a-sky>
   <a-cylinder id="ground" src="#ground" radius="30" height="0.1"></a-cylinder>
 
-  <a-entity id="teleHand" vive-controls="left" teleport-controls="type: parabolic; collisionEntities: [mixin='voxel'], #ground"></a-entity>
-  <a-entity id="blockHand" vive-controls="right" laser-controls intersection-spawn="event: click; mixin: voxel"></a-entity>
+  <a-entity id="teleHand" hand-controls="left" teleport-controls="type: parabolic; collisionEntities: [mixin='voxel'], #ground"></a-entity>
+  <a-entity id="blockHand" hand=controls="right" laser-controls intersection-spawn="event: click; mixin: voxel"></a-entity>
 
   <a-entity mixin="voxel" position="-1 0 -2"></a-entity>
   <a-entity mixin="voxel" position="0 0 -2"></a-entity>
