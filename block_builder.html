@@ -24,7 +24,7 @@
   <a-cylinder id="ground" src="#ground" radius="30" height="0.1"></a-cylinder>
 
   <a-entity id="teleHand" hand-controls="left" teleport-controls="type: parabolic; collisionEntities: [mixin='voxel'], #ground"></a-entity>
-  <a-entity id="blockHand" hand-controls="right" controller-cursor></a-entity>
+  <a-entity id="blockHand" hand-controls="right" controller-cursor intersection-spawn="event: click; mixin: voxel"></a-entity>
 
   <a-entity mixin="voxel" position="-1 0 -2"></a-entity>
   <a-entity mixin="voxel" position="0 0 -2"></a-entity>
