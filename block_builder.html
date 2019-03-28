@@ -7,10 +7,8 @@
     <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
     <script src="https://rawgit.com/ngokevin/kframe/csstricks/scenes/aincraft/components/random-color.js"></script>
     <script src="https://rawgit.com/ngokevin/kframe/csstricks/scenes/aincraft/components/snap.js"></script>
-    <script src="https://unpkg.com/aframe-controller-cursor-component@0.2.7/dist/aframe-controller-cursor-component.min.js"></script>
     <script src="scripts\teleport-controls\dist\aframe-teleport-controls.js"></script>
     <script src="scripts\widgets\dist\aframe-ui-widgets.min.js"></script>
-    <script src="scripts\detect-controllers\dist\aframe-auto-detect-controllers-component.js"></script>
     <script src="scripts\main.js"></script>
   </head>
   <body>
@@ -25,16 +23,17 @@
   <a-sky id="background" src="#skyTexture" theta-length="90" radius="30"></a-sky>
   <a-cylinder id="ground" src="#ground" radius="30" height="0.1"></a-cylinder>
 
-  <a-entity id="teleHand" auto-detect-controllers="hand:left" teleport-controls="type: parabolic; collisionEntities: [mixin='voxel'], #ground"></a-entity>
-  <a-entity id="blockHand" auto-detect-controllers="hand:right" laser-controls intersection-spawn="event: click; mixin: voxel"></a-entity>
+  <a-entity id="teleHand" vive-controls="hand: left" teleport-controls="type: parabolic; collisionEntities: [mixin='voxel'], #ground"></a-entity>
+  <a-entity id="blockHand" vive-controls="hand: right" laser-controls intersection-spawn="event: click; mixin: voxel"></a-entity>
 
   <!-- <a-entity mixin="voxel" position="-1 0 -2"></a-entity>
   <a-entity mixin="voxel" position="0 0 -2"></a-entity>
   <a-entity mixin="voxel" position="0 1 -2"></a-entity>
   <a-entity mixin="voxel" position="1 0 -2"></a-entity> -->
 
+<!-- Camera and Cursor. Add intersection-spawn="event: click; mixin: voxel" after touch-listener to spawn voxels on mouse click events -->
     <a-camera id="Camera" position="0 1.6 0" look-controls="pointerLockEnabled: true">
-        <a-cursor id="Cursor" touch-listener intersection-spawn="event: click; mixin: voxel"></a-cursor>
+        <a-cursor id="Cursor" touch-listener></a-cursor>
     </a-camera>
 
     <a-entity id="button_area" position="0 -.25 0">
@@ -46,7 +45,7 @@
 
 
 
-    <script>
+<script>
       document.querySelector('#blockHand').addEventListener(`click`, function (evt) {
       // Create a blank entity.
       var newVoxelEl = document.createElement('a-entity');
@@ -60,7 +59,7 @@
 
       // Add to the scene with `appendChild`.
       this.appendChild(newVoxelEl);
-    });
+      });
 
     AFRAME.registerComponent('intersection-spawn', {
       schema: {
@@ -90,6 +89,23 @@
         });
       }
     });
+
+// Below = When Button 1 is pressed, change the material color of the button table. This is a test for the click event for the button, which works. When the button is pressed, the color of the table changes.
+//The goal would be to switch the voxel primitive geometry from cube to spheres.
+
+    // Setting the table as the target for button being pressed
+    var targetTable = document.querySelector('#table');
+    var voxelSwitch = document.querySelector('#voxel')
+
+    var spherebutton = document.querySelector('#button1');
+    spherebutton.addEventListener('pressed', function () {
+      var randomHexColor = Math.floor(Math.random() * 0xffffff).toString(16);
+      targetTable.setAttribute('material', {
+        color: '#' + randomHexColor
+      // voxelSwitch.setAttribute('geometry', {
+      //   primitive: sphere
+        });
+       });
     </script>
 
 </a-scene>
