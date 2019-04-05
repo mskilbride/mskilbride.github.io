@@ -2,10 +2,10 @@
 <html>
   <head>
   <title>Most Basic Super-Hands Example</title>
-  <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
-  <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>
-  <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
-  <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.1.2/dist/aframe-physics-system.min.js"></script>
+  <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script> <!-- Loads A-frame V0.8.2 -->
+  <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script> <!-- Loads the SuperHands package for grabbing, throwing, etc -->
+  <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script> <!-- Loads the environment package -->
+  <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.1.2/dist/aframe-physics-system.min.js"></script> <!-- Loads the Physics system -->
   <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
   <script src="https://unpkg.com/aframe-physics-extras/dist/aframe-physics-extras.min.js"></script>
   <script>
@@ -24,10 +24,10 @@
   </script>
   </head>
   <body>
-
-    <!-- Where I left off: The moveable box now has physics and will not go through the floor. Now I need to figure out how hand-controls crashes the page, but works in the basic test. And Vive controls do not spawn the controllers -->
+    <!-- Starts A-Frame scene, additionally loads the "tron" environmental preset, shadows, and physics -->
      <a-scene environment="preset: tron; shadow: true" physics>
       <a-assets>
+              <img id="cube_material" src="assets\concrete_block.png">
               <a-mixin id="cube" geometry="primitive: box; width: 0.33; height: 0.33; depth: 0.33"
                        hoverable grabbable stretchable draggable
                        event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
@@ -48,7 +48,6 @@
                                     colliderEndEventProperty: clearedEls;">
               </a-mixin>
       </a-assets>
-            <!-- Mixin="touch" has been removed after ID to troubleshoot why controllers are showing and the too much recursion error -->
             <a-entity id="player">
               <a-camera position="0 1.6 0"></a-camera>
               <!-- <a-entity id="rhand"
@@ -66,8 +65,12 @@
               <a-entity mixin="touch" sphere-collider="objects: #cube" super-hands hand-controls="left"></a-entity>
               <a-entity mixin="touch" sphere-collider="objects: #cube" super-hands hand-controls="right"></a-entity>
             </a-entity>
-    <!-- hover & drag-drop won't have any obvious effect without some additional event handlers or components. See the examples page for more -->
-    <a-entity id="moveable_box" mixin="cube" position="0 1 1"></a-entity>
+
+    <a-entity id="box1" mixin="cube"  src="#cube_material" position="1 1 -1"></a-entity>
+    <a-entity id="box2" mixin="cube" position="0 1 -1"></a-entity>
+    <a-entity id="box3" mixin="cube" position="-1 1 -1"></a-entity>
+    <a-entity id="box4" mixin="cube" position="-1 1 -.5"></a-entity>
+    <a-entity id="box5" mixin="cube" position="1 1 -.5"></a-entity>
 
     <!-- ground collider keeps objets from falling -->
     <a-box static-body width=100 height=0.001 depth=100 visible="false"></a-box>
