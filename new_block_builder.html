@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <title>Block Builder</title>
     <meta name="description" content="Building Blocks">
-    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-teleport-controls@0.2.x/dist/aframe-teleport-controls.min.js"></script>
-    <script src="https://unpkg.com/aframe-controller-cursor-component@0.2.x/dist/aframe-controller-cursor-component.min.js"></script>
-    <script src="https://rawgit.com/ngokevin/kframe/csstricks/scenes/aincraft/components/random-color.js"></script>
-    <script src="https://rawgit.com/ngokevin/kframe/csstricks/scenes/aincraft/components/snap.js"></script>
-    <script src="https://rawgit.com/ngokevin/kframe/csstricks/scenes/aincraft/components/intersection-spawn.js"></script>
-
+<script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
+<script src="https://unpkg.com/aframe-teleport-controls@0.2.x/dist/aframe-teleport-controls.min.js"></script>
+<script src="https://unpkg.com/aframe-controller-cursor-component@0.2.x/dist/aframe-controller-cursor-component.min.js"></script>
+<script src="https://rawgit.com/ngokevin/kframe/csstricks/scenes/aincraft/components/random-color.js"></script>
+<script src="https://rawgit.com/ngokevin/kframe/csstricks/scenes/aincraft/components/snap.js"></script>
+<script src="https://rawgit.com/ngokevin/kframe/csstricks/scenes/aincraft/components/intersection-spawn.js"></script>
+  </head>
     <body>
       <a-scene>
         <a-assets>
@@ -25,7 +25,6 @@
         </a-assets>
 
         <a-cylinder id="ground" src="#groundTexture" radius="30" height="0.1"></a-cylinder>
-
         <a-sky id="background" src="#skyTexture" theta-length="90" radius="30"></a-sky>
 
         <!-- Hands. -->
@@ -37,4 +36,5 @@
           <a-cursor intersection-spawn="event: click; mixin: voxel"></a-cursor>
         </a-camera>
       </a-scene>
-    </body>
+</body>
+</html>
