@@ -29,14 +29,13 @@
         </a-assets>
 
               <!-- Environment -->
-        <a-entity environment="preset: forest; shadow: true; ground: hills;"></a-entity>
+        <a-entity id="sceneSetting" environment="preset: forest; shadow: true; ground: hills;"></a-entity>
 
               <!-- Player -->
-            <a-entity id="Player" position="0 1.6 0" rotation="">
+            <a-entity id="Player" position="0 1.6 0" movement-controls="controls: checkpoint" checkpoint-controls="mode: animate">
                 <a-entity id="Camera" camera mouse-cursor="" look-controls="pointerLockEnabled: true">
                   <a-entity id="Cursor"
                     touch-listener
-                    teleport-controls="teleportOrigin: #Camera; startEvents:starttouch; endEvents:endtouch; curveShootingSpeed:15; hitCylinderRadius:1"
                     cursor="downEvents: ; fuse: false; upEvents: "
                     position="0 0 -1"
                     geometry="primitive:ring;radiusInner:0.02;radiusOuter:0.03"
@@ -55,24 +54,53 @@
                 <a-cylinder checkpoint="offset:0 1.6 0" radius="1" height="0.1" position="-3 0 0" color="#39BB82"></a-cylinder>
               </a-entity>
 
-              <a-box id="cube" color="red" position="5.5 0.6 1">
-                <a-entity id="mybutton" ui-button="" position="-0.5 .6 -0.016" rotation="45 -89 0" scale="1 1 1" visible="true" cursor-listener=""></a-entity>
-              </a-box>
+              <a-entity id="station1">
+                <a-box id="station1_cube" color="gray" position="5.5 0.6 1">
+                  <a-entity id="station1_button" ui-button="" position="-0.5 .6 -0.016" rotation="45 -89 0" scale="1 1 1" visible="true" cursor-listener=""></a-entity>
+                </a-box>
+              </a-entity>
+
+              <a-entity id="station2" position="-4.5 0 -6.5">
+                <a-box id="station2_cube" color="gray" position="5.5 0.6 1">
+                  <a-entity id="station2_button" ui-button="" position="0 .6 .32" rotation="45 0 0" scale="1 1 1" visible="true" cursor-listener=""></a-entity>
+                </a-box>
+              </a-entity>
+
+              <a-entity id="station3" position="-9 0 0">
+                <a-box id="station3_cube" color="gray" position="5.5 0.6 1">
+                  <a-entity id="station3_button" ui-button="" position=".371 .6 -0.016" rotation="45 90 0" scale="1 1 1" visible="true" cursor-listener=""></a-entity>
+                </a-box>
+              </a-entity>
+
+
 
     </a-scene>
 
     <script>
+    var sceneChange = document.querySelector('sceneSetting');
+    var targetCube = document.querySelector('#station1_cube');
+
+    var change2Tron = document.querySelector('#station1_button');
+      change2Tron.addEventListener('pressed', function () {
+        tronChange.setAttribute('environment' {
+          preset: 'tron'
+        });
+       });
+
+
     // Setting the cube as the target for button being pressed
     var targetCube = document.querySelector('#cube');
 
     // When the button is pressed, change the cube to a random color.
-    var mybutton = document.querySelector('#mybutton');
-    mybutton.addEventListener('pressed', function () {
-      var randomHexColor = Math.floor(Math.random() * 0xffffff).toString(16);
-      targetCube.setAttribute('material', {
-        color: '#' + randomHexColor
-     });
-    });
+    // var mybutton = document.querySelector('#mybutton');
+    // mybutton.addEventListener('pressed', function () {
+    //   var randomHexColor = Math.floor(Math.random() * 0xffffff).toString(16);
+    //   targetCube.setAttribute('material', {
+    //     color: '#' + randomHexColor
+    //  });
+    // });
+
+
     </script>
 
   </body>

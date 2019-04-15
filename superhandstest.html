@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <meta charset="utf-8">
+  <head>
+  <title>Most Basic Super-Hands Example</title>
+  <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+  <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>
+  <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+  <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.1.2/dist/aframe-physics-system.min.js"></script>
+  <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
+  <script src="https://unpkg.com/aframe-physics-extras/dist/aframe-physics-extras.min.js"></script>
+  <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+  <script src="scripts\widgets\dist\aframe-ui-widgets.min.js"></script>
+  <script>
+        // turn controller's physics presence on only while button held down
+          AFRAME.registerComponent('phase-shift', {
+            init: function () {
+              var el = this.el
+              el.addEventListener('gripdown', function () {
+                el.setAttribute('collision-filter', {collisionForces: true})
+              })
+              el.addEventListener('gripup', function () {
+                el.setAttribute('collision-filter', {collisionForces: false})
+              })
+            }
+          })
+  </script>
+  </head>
+  <body>
+
+     <a-scene environment="preset: forest; dressing: trees; shadow: true" physics>
+      <a-assets>
+              <img id="shapeOrigin" src="assets\shapeOrigin.jpg"/>
+              <a-mixin id="cube" geometry="primitive: box; width: 0.2; height: 0.2; depth: 0.2"
+                       hoverable grabbable stretchable draggable
+                       event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                       event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"
+                       dynamic-body shadow></a-mixin>
+              <a-mixin id="sphere" geometry="primitive: sphere; radius: .15"
+                       grabbable stretchable
+                       event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                       event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"
+                       dynamic-body shadow></a-mixin>
+               <!-- <a-mixin id="transformer" color-randomizer droppable static-body
+                       collision-filter="collisionForces: false"
+                       event-set__dragon="_event: dragover-start; material.wireframe: true"
+                       event-set__dragoff="_event: dragover-end; material.wireframe: false"
+                       geometry="primitive: box; width: 0.5; height: 0.5; depth: 0.5"></a-mixin> -->
+              <a-mixin id="touch"
+                       physics-collider phase-shift
+                       collision-filter="collisionForces: false"
+                       static-body="shape: sphere; sphereRadius: 0.02"
+                       super-hands="colliderEvent: collisions;
+                                    colliderEventProperty: els;
+                                    colliderEndEvent: collisions;
+                                    colliderEndEventProperty: clearedEls;">
+              </a-mixin>
+      </a-assets>
+
+            <a-entity id="player">
+              <a-camera id="head" position="0 1.6 0"></a-camera>
+              <a-entity id="lhand" mixin="touch" sphere-collider="objects: #cube, #sphere" hand-controls="left" teleport-controls="cameraRig: #player; teleportOrigin: #head; collisionEntities: #throwing_position"></a-entity>
+              <a-entity id="rhand" mixin="touch" sphere-collider="objects: #cube, #sphere" hand-controls="right"></a-entity>
+           </a-entity>
+
+
+           <a-entity id="throwing_position">
+               <a-entity id="frontpanel" static-body geometry="" material="" position="0 0.5 -1.22608" scale="4.3 1 .2"></a-entity>
+               <a-entity id="bottompanel" static-body geometry="" material="color: gray" position="0 0.03 0" scale="4.3 2.6 0.05" rotation="90 0 0"></a-entity>
+               <a-entity id="rightpanel" static-body geometry="" material="" position="2.06157 0.49729 0.07565" scale="1 2.72899 0.2" rotation="0 90 90"></a-entity>
+               <a-entity id="leftpanel" static-body geometry="" material="" position="-2.01491 0.29655 -0.00198" scale="1.34949 2.61659 0.2" rotation="0 90 90"></a-entity>
+               <a-entity id="backpanel" static-body geometry="" material="" position="0 0.5 1.39216" scale="4.2 1 0.2"></a-entity>
+               <a-entity id="button_area" position="1.1 -.092 0">
+                 <a-entity id="table" geometry="height: 3; depth: 0.25" rotation="-90 0 0" position="-3 1 0" scale=".5 .88 .5" material="color: white"></a-entity>
+                 <a-entity id="button2" ui-button="" position="-3 1.075 0" rotation="0 -90 0" scale="1 1 1" visible="true"></a-entity>
+               </a-entity>
+          </a-entity>
+
+          <a-entity id="ball_pit">
+            <a-entity id="ball_side1" static-body geometry="primitive: box" material="color: red" scale="0.1 1 1" position="1.1 0 .8"></a-entity>
+            <a-entity id="ball_side2" static-body geometry="primitive: box" material="color: red" scale="0.1 1 1" position="1.54694 0 0.35191" rotation="0 -90 0"></a-entity>
+          </a-entity>
+
+        <a-entity id=target>
+          <a-entity id="targetOutter" geometry="primitive:ring;radiusOuter:0;radiusInner:0" material="color:#000000" position=".3 2.3 -3.5"></a-entity>
+          <a-entity id="targetCenter" geometry="primitive:circle;radius:0.55" material="color:#e0dc29" position=".34 2.3 -3.5" visible="false"></a-entity>
+        </a-entity>
+
+
+
+    <!-- hover & drag-drop won't have any obvious effect without some additional event handlers or components. See the examples page for more -->
+    <!-- <a-entity id="moveable_box" mixin="cube" position="0 1 -1"></a-entity> -->
+    <a-entity id="moveable_sphere" mixin="sphere" position="0 1 -1"></a-entity>
+    <!-- <a-entity id="moveable_sphere" mixin="sphere" position="0 1 -1" scale=".25 .25 .25"></a-entity> -->
+    <!-- <a-entity id="moveable_sphere2" mixin="sphere" position=".7 1 -1" scale=".25 .25 .25"></a-entity> -->
+
+    <!-- <a-box id="shapeDropper" position="0 3 0" material="src:#shapeOrigin"></a-box> -->
+
+    <!-- ground collider keeps objets from falling -->
+    <a-box id="solid_ground" static-body width=100 height=0.001 depth=100 visible="false"></a-box>
+
+  </a-scene>
+
+  <script>
+      var shapeButton = document.querySelector('#button2');
+      shapeButton.addEventListener('pressed', function () {
+        var newShape = document.createElement('a-entity');
+        newShape.setAttribute('mixin', 'sphere');
+        newShape.setAttribute('position', {x: 1, y: 1, z: -3.5});
+        this.appendChild(newShape);
+        });
+  </script>
+</body>
+</html>
