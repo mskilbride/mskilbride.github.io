@@ -2,106 +2,95 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Forest Test</title>
-    <meta name="description" content="Forest Test">
-    <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
-    <script src="scripts\widgets\dist\aframe-ui-widgets.min.js"></script> <!-- Loads buttons, dials and other widgets -->
-    <script src="scripts\cursor-components\dist\aframe-mouse-cursor-component.min.js"></script>
-    <script src="scripts\environment\dist\aframe-environment-component.min.js"></script> <!-- Loads predetermined forest background -->
-    <script src="scripts\extras\dist\aframe-extras.js"></script> <!-- Loads movement contols, mouse controls, and checkpoint system -->
-    <script src="scripts\physics\dist\aframe-physics-system.js"></script> <!-- Loads physics system *has not worked yet in this scene* -->
-    <script src="scripts\teleport-controls\dist\aframe-teleport-controls.js"></script>
-    <script src="scripts\main.js"></script>
+      <title>POC Directory</title>
+        <meta name="description" content="Building Blocks">
+        <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script> <!-- The controllers only have loaded in 0.8.2, not the latest 0.9.0 -->
+        <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script> <!-- Loads predetermined forest background -->
+        <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.3.0/dist/aframe-physics-system.min.js"></script> <!-- Loads the physics system -->
+        <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>
   </head>
-  <body>
+   <body>
+      <a-scene>
 
-    <a-scene>
+            <a-assets>
+              <img id="portal-preview" src="assets/dark-honeycomb.png"></img>
 
-        <a-assets>
-          <a-mixin id="checkpoint"></a-mixin>
-          <a-mixin id="checkpoint-hovered" color="#6CEEB5"></a-mixin>
-          <a-mixin id="beveled-square" geometry="primitive: cone; radiusTop: 0.15; radiusBottom: 0.19; height: 0.02; segmentsRadial: 4; segmentsHeight: 1" rotation="0 45 0"></a-mixin>
-          <a-mixin id="square" geometry="primitive: box; width: 0.18; height: 0.025; depth: 0.18;" position="0 0.02 0"></a-mixin>
-          <a-mixin id="blue" material="color: #1E2768;"></a-mixin>
-          <a-mixin id="darkgreen" material="color: #22FF90;"></a-mixin>
-          <a-mixin id="yellow" material="color: #FFF88E;"></a-mixin>
-          <a-mixin id="offset" position="0 0.01 0"></a-mixin>
-        </a-assets>
+              <a-mixin id="touch"
+                physics-collider phase-shift
+                collision-filter="collisionForces: false"
+                static-body="shape: sphere; sphereRadius: 0.02"
+                super-hands="colliderEvent: collisions;
+                             colliderEventProperty: els;
+                             colliderEndEvent: collisions;
+                             colliderEndEventProperty: clearedEls;">
+              </a-mixin>
+            </a-assets>
 
-              <!-- Environment -->
-        <a-entity id="sceneSetting" environment="preset: forest; shadow: true; ground: hills;"></a-entity>
+            <!-- Environment -->
+          <a-entity id="sceneSetting" environment="preset: starry; shadow: true"></a-entity>
 
-              <!-- Player -->
-            <a-entity id="Player" position="0 1.6 0" movement-controls="controls: checkpoint" checkpoint-controls="mode: animate">
-                <a-entity id="Camera" camera mouse-cursor="" look-controls="pointerLockEnabled: true">
-                  <a-entity id="Cursor"
-                    touch-listener
-                    cursor="downEvents: ; fuse: false; upEvents: "
-                    position="0 0 -1"
-                    geometry="primitive:ring;radiusInner:0.02;radiusOuter:0.03"
-                    material="color:#CCC;shader:flat"
-                    visible="true"
-                    raycaster="">
-                  </a-entity>
-                </a-entity>
-          </a-entity>
+          <!-- Player -->
+        <a-entity id="Player">
+            <a-entity id="Camera" camera position="0 1.6 0"> </a-entity>
+              <!-- <a-entity cursor="rayOrigin: mouse"
+                        position="0 0 -1"
+                        geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+                        material="color: white; shader: flat"> -->
+                  <a-entity id="lHand" hand-controls="left"></a-entity>
+                  <a-entity id="rHand" hand-controls="right" laser-controls raycaster="objects: #Block_Link, #Scene_Link, #Throw_Link"></a-entity>
+            </a-entity>
+        </a-entity>
 
+        <a-entity text="font: mozillavr; size: 16; align: center; value: Welcome to the directory for my three proof of concept scenes for A-frame.
+                  \n\nIn most scenes your left hand will teleport with the trigger, the right will use the laser to interact with buttons and portals.
+                  \n\nPlease turn around and select a scene!"
+                  position="0 1.6 -2">
+        </a-entity>
 
-              <!-- Checkpoints -->
-              <a-entity position="1 0 1" rotation="0 0" scale="1 1 1" visible="true">
-                <a-cylinder checkpoint="offset:0 1.6 0" radius="1" height="0.1" position="0 0 -5.2" color="#39BB82"></a-cylinder>
-                <a-cylinder checkpoint="offset:0 1.6 0" radius="1" height="0.1" position="3 0 0" color="#39BB82"></a-cylinder>
-                <a-cylinder checkpoint="offset:0 1.6 0" radius="1" height="0.1" position="-3 0 0" color="#39BB82"></a-cylinder>
-              </a-entity>
+          <!-- Clickable Links -->
 
-              <a-entity id="station1">
-                <a-box id="station1_cube" color="gray" position="5.5 0.6 1">
-                  <a-entity id="station1_button" ui-button="" position="-0.5 .6 -0.016" rotation="45 -89 0" scale="1 1 1" visible="true" cursor-listener=""></a-entity>
-                </a-box>
-              </a-entity>
+          <a-link id="Block_Link" href="POC_Examples\blockBuilder.html" title="Block Builder"
+              static-body="shape: sphere; sphereRadius: 0.25"
+              image="#portal-preview"
+              onmouseover="this.setAttribute('link', {highlighted: true})"
+              onmouseout="this.setAttribute('link', {highlighted: false})"
+              position= "0 1.6 2" rotation="0 0 0" scale="0.25 0.25 0.25">
+          </a-link>
 
-              <a-entity id="station2" position="-4.5 0 -6.5">
-                <a-box id="station2_cube" color="gray" position="5.5 0.6 1">
-                  <a-entity id="station2_button" ui-button="" position="0 .6 .32" rotation="45 0 0" scale="1 1 1" visible="true" cursor-listener=""></a-entity>
-                </a-box>
-              </a-entity>
+          <a-link id="Scene_Link" href="POC_Examples\sceneChanger.html" title="Scene Changer"
+              static-body="shape: sphere; sphereRadius: 0.25"
+              image="#portal-preview"
+              navigate-on-click="url: https://www.mskilbride.github.io/POC_Examples/sceneChanger.html"
+              on="click"
+              position= "-1 1.6 2" rotation="0 0 0" scale="0.25 0.25 0.25">
+          </a-link>
 
-              <a-entity id="station3" position="-9 0 0">
-                <a-box id="station3_cube" color="gray" position="5.5 0.6 1">
-                  <a-entity id="station3_button" ui-button="" position=".371 .6 -0.016" rotation="45 90 0" scale="1 1 1" visible="true" cursor-listener=""></a-entity>
-                </a-box>
-              </a-entity>
+          <a-link id="Throw_Link" href="POC_Examples\handThrow.html" title="Hand Throw"
+              static-body="shape: sphere; sphereRadius: 0.25"
+              image="#portal-preview"
+              on="click"
+              navigate-on-click="url: https://www.mskilbride.github.io/POC_Examples/handThrow.html"
+              position= "1 1.6 2" rotation="0 0 0" scale="0.25 0.25 0.25">
+          </a-link>
 
+      </a-scene>
 
+        <script>
+          AFRAME.registerComponent('navigate-on-click', {
+            schema: {
+              url: {default: ''}
+            },
 
-    </a-scene>
+            init: function () {
+              var data = this.data;
+              var el = this.el;
 
-    <script>
-    var sceneChange = document.querySelector('sceneSetting');
-    var targetCube = document.querySelector('#station1_cube');
+              el.addEventListener('click', function () {
+                window.location.href = data.url;
+              });
+            }
+          });
+        </script>
 
-    var change2Tron = document.querySelector('#station1_button');
-      change2Tron.addEventListener('pressed', function () {
-        tronChange.setAttribute('environment' {
-          preset: 'tron'
-        });
-       });
-
-
-    // Setting the cube as the target for button being pressed
-    var targetCube = document.querySelector('#cube');
-
-    // When the button is pressed, change the cube to a random color.
-    // var mybutton = document.querySelector('#mybutton');
-    // mybutton.addEventListener('pressed', function () {
-    //   var randomHexColor = Math.floor(Math.random() * 0xffffff).toString(16);
-    //   targetCube.setAttribute('material', {
-    //     color: '#' + randomHexColor
-    //  });
-    // });
-
-
-    </script>
-
-  </body>
+   </body>
 </html>
