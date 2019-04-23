@@ -22,9 +22,11 @@
       <a-cylinder position="1 0.75 -3"
                   radius="0.5"
                   height="1.5"
-                  color="red"></a-cylinder>
+                  color="red">
+                  <a-animation attribute="position" begin="mouseenter" to="5 3 -5" direction="alternate" repeat="once"></a-animation>
+      </a-cylinder>
 
-      <a-camera position="0 1.6 0">
+      <a-camera position="0 0 0">
         <a-cursor color="orange" />
       </a-camera>
 
