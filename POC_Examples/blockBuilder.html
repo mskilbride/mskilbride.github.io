@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Block Builder</title>
+    <meta name="description" content="Building Blocks">
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script> <!-- The controllers only have loaded in 0.8.2, not the latest 0.9.0 -->
+    <script src="https://rawgit.com/ngokevin/kframe/csstricks/scenes/aincraft/components/random-color.js"></script>
+    <script src="https://rawgit.com/ngokevin/kframe/csstricks/scenes/aincraft/components/snap.js"></script>
+    <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+    <script src="https://rawgit.com/caseyyee/aframe-ui-widgets/master/dist/aframe-ui-widgets.min.js"></script>
+    <script src="..\scripts\main.js"></script>
+    <script>
+    AFRAME.registerComponent('intersection-spawn', {
+        schema: {
+          default: '',
+          parse: AFRAME.utils.styleParser.parse
+        },
+
+        init: function () {
+          const data = this.data;
+          const el = this.el;
+
+          el.addEventListener(data.event, evt => {
+            // Create element.
+            const spawnEl = document.createElement('a-entity');
+
+            // Snap intersection point to grid and offset from center.
+            spawnEl.setAttribute('position', evt.detail.intersection.point);
+
+            // Set components and properties.
+            Object.keys(data).forEach(name => {
+              if (name === 'event') { return; }
+              AFRAME.utils.entity.setComponentProperty(spawnEl, name, data[name]);
+            });
+
+            // Append to scene.
+            el.sceneEl.appendChild(spawnEl);
+          });
+        }
+      });
+    </script>
+  </head>
+   <body>
+      <a-scene>
+
+            <a-assets>
+              <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
+              <img id="skyTexture" src="https://cdn.aframe.io/a-painter/images/sky.jpg">
+              <img id="portal-preview" src="../assets/dark-honeycomb.png"></img>
+              <a-mixin id="voxel"  static-body geometry="primitive: box; height: 0.3; width: 0.3; depth: 0.3" material="shader: standard" random-color snap="offset: 0.25 0.25 0.25; snap: 0.3 0.3 0.3"></a-mixin>
+            </a-assets>
+
+            <a-sky id="background" src="#skyTexture" theta-length="90" radius="30"></a-sky>
+            <a-cylinder id="ground" src="#groundTexture" radius="30" height="0.1"></a-cylinder>
+
+            <a-link id="Return_Link" href="..\index.html" title="Return"
+                static-body="shape: sphere; sphereRadius: 0.25"
+                image="#portal-preview"
+                onmouseover="this.setAttribute('link', {highlighted: true})"
+                onmouseout="this.setAttribute('link', {highlighted: false})"
+                position= "0 1.6 2" rotation="0 0 0" scale="0.25 0.25 0.25">
+            </a-link>
+
+          <!-- Camera and Cursor. Add intersection-spawn="event: click; mixin: voxel" after touch-listener to spawn voxels on mouse click events -->
+            <a-entity id="Player">
+              <a-camera id="Camera">
+                  <!-- <a-cursor id="Cursor" touch-listener></a-cursor> -->
+              </a-camera>
+              <a-entity id="teleHand" hand-controls="left" teleport-controls="cameraRig: #Player; teleportOrigin: #Camera; collisionEntities: [mixin='voxel'], #ground"></a-entity>
+              <a-entity id="blockHand" hand-controls="right" laser-controls raycaster="objects: #ground, #Return_Link, [mixin='voxel']" intersection-spawn="event: click; mixin: voxel"></a-entity>
+            </a-entity>
+
+              <a-entity id="button_area" position="0 -.5 0">
+                <a-entity id="table" geometry="height: 1.5; depth: 0.25" rotation="-90 0 0" position="-3 1 0" scale=".5 .8 .5" material="color: white"></a-entity>
+                <!-- <a-entity id="button1" ui-button="" position="-3 1.075 1" rotation="0 -90 0" scale="1 1 1" visible="true" cursor-listener=""></a-entity> -->
+                <a-entity id="button2" ui-button="" position="-3 1.075 0" rotation="0 -90 0" scale="1 1 1" visible="true" cursor-listener=""></a-entity>
+                <!-- <a-entity id="button3" ui-button="" position="-3 1.075 -1" rotation="0 -90 0" scale="1 1 1" visible="true" cursor-listener=""></a-entity> -->
+              </a-entity>
+
+          <!-- <a-entity id="ball_setup">
+            <a-entity id="moveable_ball" geometry="primitive:sphere" scale="0.2 0.2 0.2" position="0 4 0"></a-entity>
+            <a-entity id="ball_platform" geometry="" rotation="90 0 90" position="0 3.7 0" material="" velocity="" static-body></a-entity>
+          </a-entity>
+
+              ground collider keeps objets from falling
+              <a-box static-body width=100 height=0.001 depth=100 visible="false"></a-box> -->
+      </a-scene>
+
+      <script>
+            document.querySelector('#blockHand').addEventListener(`click`, function (evt) {
+            // Create a blank entity.
+            var newVoxelEl = document.createElement('a-entity');
+
+            // Use the mixin to make it a voxel.
+            newVoxelEl.setAttribute('mixin', 'voxel');
+
+            // Set the position using intersection point. The `snap` component above which
+            // is part of the mixin will snap it to the closest half meter.
+            newVoxelEl.setAttribute('position', evt.detail.intersection.point);
+
+            // Add to the scene with `appendChild`.
+            this.appendChild(newVoxelEl);
+            });
+
+      // Below = When Button 1 is pressed, change the material color of the button table. This is a test for the click event for the button, which works. When the button is pressed, the color of the table changes.
+      //The goal would be to switch the voxel primitive geometry from cube to spheres.
+
+          // Setting the table as the target for button being pressed
+          var targetTable = document.querySelector('#table');
+          var voxelSwitch = document.querySelector('#voxel');
+          var scenePhysics = document.querySelector('a-scene');
+
+          // var spherebutton = document.querySelector('#button1');
+          // spherebutton.addEventListener('pressed', function () {
+          //   voxelSwitch.setAttribute('geometry', {
+          //     primitive: 'sphere'
+          //     });
+          //    });
+
+          var tableColor = document.querySelector('#button2');
+          tableColor.addEventListener('pressed', function () {
+            var randomHexColor = Math.floor(Math.random() * 0xffffff).toString(16);
+              targetTable.setAttribute('material', {
+                 color: '#' + randomHexColor
+                 });
+                });
+
+
+          // var enablePhysics = document.querySelector('#button3');
+          //   enablePhysics.addEventListener('pressed', function () {
+          //     scenePhysics.setAttribute('physics')
+          //     voxelSwitch.setAttribute('dynamic-body', {
+          //       shape: 'box'
+          //     });
+          //    });
+
+      </script>
+   </body>
+</html>

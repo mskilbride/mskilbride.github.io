@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Scene Changer</title>
+    <meta name="description" content="Scene Changer">
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <script src="https://rawgit.com/caseyyee/aframe-ui-widgets/master/dist/aframe-ui-widgets.min.js"></script> <!-- Loads buttons, dials and other widgets -->
+    <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script> <!-- Loads predetermined forest background -->
+    <script src="https://rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.js"></script> <!-- Loads movement contols, mouse controls, and checkpoint system -->
+    <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+  </head>
+  <body>
+
+    <a-scene>
+
+        <a-assets>
+          <a-mixin id="checkpoint"></a-mixin>
+          <a-mixin id="checkpoint-hovered" color="#6CEEB5"></a-mixin>
+          <a-mixin id="offset" position="0 0.01 0"></a-mixin>
+          <img id="portal-preview" src="../assets/dark-honeycomb.png"></img>
+        </a-assets>
+
+              <!-- Environment -->
+        <a-entity id="sceneSetting" environment="preset: forest; shadow: true; ground: hills;"></a-entity>
+
+              <!-- Player -->
+              <a-entity id="Player"  movement-controls="controls: checkpoint" checkpoint-controls="mode: teleport">
+                <a-camera id="Camera"> </a-camera>
+                <a-entity id="lhand" hand-controls="left"></a-entity>
+                <a-entity id="rhand" hand-controls="right" laser-controls raycaster="objects= #pad1, #pad2, #pad3; far: 5"></a-entity>
+              </a-entity>
+
+
+              <!-- Checkpoints -->
+              <a-entity position="1 0 1" rotation="0 0" scale="1 1 1" visible="true">
+                <a-cylinder id="pad1" checkpoint="offset:0 0 0" radius="1" height="0.1" position="0 0 -5.2" color="#39BB82"></a-cylinder>
+                <a-cylinder id="pad2" checkpoint="offset:0 0 0" radius="1" height="0.1" position="3 0 0" color="#39BB82"></a-cylinder>
+                <a-cylinder id="pad3" checkpoint="offset:0 0 0" radius="1" height="0.1" position="-3 0 0" color="#39BB82"></a-cylinder>
+              </a-entity>
+
+              <a-entity id="station1">
+                <a-box id="station1_cube" color="gray" position="5.5 0.6 1">
+                  <a-entity id="station1_button" ui-button="" position="-0.5 .6 -0.016" rotation="45 -89 0" scale="1 1 1" visible="true"></a-entity>
+                </a-box>
+              </a-entity>
+
+              <a-entity id="station2" position="-4.5 0 -6.5">
+                <a-box id="station2_cube" color="gray" position="5.5 0.6 1">
+                  <a-entity id="station2_button" ui-button="" position="0 .6 .32" rotation="45 0 0" scale="1 1 1" visible="true"></a-entity>
+                </a-box>
+              </a-entity>
+
+              <a-entity id="station3" position="-9 0 0">
+                <a-box id="station3_cube" color="gray" position="5.5 0.6 1">
+                  <a-entity id="station3_button" ui-button="" position=".371 .6 -0.016" rotation="45 90 0" scale="1 1 1" visible="true"></a-entity>
+                </a-box>
+              </a-entity>
+
+              <a-link id="Return_Link" href="..\index.html" title="Return"
+                  static-body="shape: sphere; sphereRadius: 0.25"
+                  image="#portal-preview"
+                  onmouseover="this.setAttribute('link', {highlighted: true})"
+                  onmouseout="this.setAttribute('link', {highlighted: false})"
+                  position= ".7 1.6 2" rotation="0 0 0" scale="0.25 0.25 0.25">
+              </a-link>
+    </a-scene>
+
+<script>
+
+      var sceneChange = document.querySelector('#sceneSetting');
+      var sceneChange2 = document.querySelector('#sceneSetting');
+
+      var environmentUpdate = document.querySelector('#station1_button');
+        environmentUpdate.addEventListener('pressed', function () {
+          sceneChange.setAttribute('environment', {
+              preset: 'tron',
+              shadow: 'true',
+              });
+            });
+
+      var environmentUpdate2 = document.querySelector('#station2_button');
+        environmentUpdate2.addEventListener('pressed', function () {
+          sceneChange2.setAttribute('environment', {
+              preset: 'japan',
+              shadow: 'true',
+              });
+            });
+  </script>
+
+    // Setting the cube as the target for button being pressed
+    var targetCube = document.querySelector('#cube');
+
+    // When the button is pressed, change the cube to a random color.
+    // var mybutton = document.querySelector('#mybutton');
+    // mybutton.addEventListener('pressed', function () {
+    //   var randomHexColor = Math.floor(Math.random() * 0xffffff).toString(16);
+    //   targetCube.setAttribute('material', {
+    //     color: '#' + randomHexColor
+    //  });
+    // });
+
+
+    </script>
+
+<!-- Old mouse/keyboard camera and cursor identity -->
+    <!-- Player
+  <a-entity id="Player" position="0 1.6 0" movement-controls="controls: checkpoint" checkpoint-controls="mode: animate">
+      <a-entity id="Camera" camera look-controls="pointerLockEnabled: true">
+        <a-entity id="Cursor"
+          mouse-cursor=""
+          cursor="downEvents: ; fuse: false; upEvents: "
+          position="0 0 -1"
+          geometry="primitive:ring;radiusInner:0.02;radiusOuter:0.03"
+          material="color:#CCC;shader:flat"
+          visible="true"
+          raycaster="">
+        </a-entity>
+      </a-entity>
+</a-entity> -->
+
+  </body>
+</html>
