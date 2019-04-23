@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/0.9.1/aframe.min.js"></script>
   </head>
   <body>
     <a-scene>
 
-      <a-box position="-2 2 -3"
-             rotation="0 0 0"
+      <a-box position="-1 0.5 -3"
+             rotation="0 45 0"
              color="blue">
              <a-animation attribute="rotation" begin="mouseenter" repeat="2" to="0 360 0"></a-animation>
       </a-box>
 
-      <a-sphere position="0 2 -3"
+      <a-sphere position="0 1.25 -5"
+                radius="1.25"
                 rotation="0 0 0"
                 color="yellow">
-            <a-animation attribute="position" to="0 2.4 -3" direction="alternate" dur="2000" repeat="indefinite"></a-animation>
+            <a-animation attribute="position" to="0 3 -5" direction="alternate" dur="2000" repeat="indefinite"></a-animation>
       </a-sphere>
+
+      <a-cylinder position="1 0.75 -3"
+                  radius="0.5"
+                  height="1.5"
+                  color="red"></a-cylinder>
 
       <a-camera position="0 1.6 0">
         <a-cursor color="orange" />
@@ -30,7 +36,7 @@
                rotation="-90 0 0"
                width="20"
                height="20"
-               repeat="50 50"></a-plane>
+               repeat="100 100"></a-plane>
 
       <a-sky src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg"></a-sky>
     </a-scene>
