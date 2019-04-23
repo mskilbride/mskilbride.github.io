@@ -6,23 +6,15 @@
   <body>
     <a-scene>
 
-      <a-box position="-1 0.5 -3"
-             rotation="0 45 0"
-             color="blue">
-             <a-animation attribute="rotation" begin="mouseenter" repeat="2" to="0 360 0"></a-animation>
+      <a-box position="-1 0.5 -3" rotation="0 45 0" color="blue">
+             <a-animation attribute="rotation" begin="mouseenter" repeat="1" to="0 360 0"></a-animation>
       </a-box>
 
-      <a-sphere position="0 1.25 -5"
-                radius="1.25"
-                rotation="0 0 0"
-                color="yellow">
-            <a-animation attribute="position" to="0 3 -5" direction="alternate" dur="2000" repeat="indefinite"></a-animation>
+      <a-sphere position="0 1.25 -5"radius="1.25" rotation="0 0 0" color="yellow">
+                <a-animation attribute="position" to="0 3 -5" direction="alternate" dur="2000" repeat="indefinite"></a-animation>
       </a-sphere>
 
-      <a-cylinder position="1 0.75 -3"
-                  radius="0.5"
-                  height="1.5"
-                  color="red">
+      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="red">
                   <a-animation attribute="position" begin="mouseenter" to="5 3 -5" dur="2000" direction="alternate" repeat="1"></a-animation>
       </a-cylinder>
 
@@ -33,14 +25,10 @@
       <a-light type="point" color="white" position="-10.3 4.7 -14"></a-light>
       <a-light type="point" color="white" position="5 4.7 9.7"></a-light>
 
-      <a-plane src="https://cdn.aframe.io/a-painter/images/floor.jpg"
-               position="0 0 0"
-               rotation="-90 0 0"
-               width="20"
-               height="20"
-               repeat="100 100"></a-plane>
+      <a-plane src="https://cdn.aframe.io/a-painter/images/floor.jpg" position="0 0 0" rotation="-90 0 0" width="20" height="20" repeat="100 100"></a-plane>
 
       <a-sky src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg"></a-sky>
+
     </a-scene>
   </body>
 </html>
