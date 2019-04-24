@@ -6,7 +6,7 @@
   <body>
     <a-scene>
 
-      <!-- Create Box -->
+      <!-- Create Box  with position, rotation, and a color -->
       <a-box position="-1 0.5 -3" rotation="0 45 0" color="blue">
             <!-- When the cursor touches the object, animate the rotation along the Y-axis 360 degrees once -->
              <a-animation attribute="rotation" begin="mouseenter" repeat="1" to="0 360 0"></a-animation>
@@ -24,6 +24,12 @@
                   <a-animation attribute="position" begin="mouseenter" to="5 3 -5" dur="2000" direction="alternate" repeat="1"></a-animation>
       </a-cylinder>
 
+      <!-- Create plane to serve as the ground, using the .jpg at the source as the material -->
+      <a-plane src="https://cdn.aframe.io/a-painter/images/floor.jpg" position="0 0 0" rotation="-90 0 0" width="20" height="20" repeat="100 100"></a-plane>
+
+      <!-- Create a sky box using the .jpg at the source as the material -->
+      <a-sky src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg"></a-sky>
+
       <!-- Create Camera -->
       <a-camera position="0 0 0">
         <!-- Create cursor as child of Camera to serve as our "mouse" for the scene -->
@@ -33,12 +39,6 @@
       <!-- Create two additional lighting sources -->
       <a-light type="point" color="white" position="-10.3 4.7 -14"></a-light>
       <a-light type="point" color="white" position="5 4.7 9.7"></a-light>
-
-      <!-- Create plane to serve as the ground, using the .jpg at the source as the material -->
-      <a-plane src="https://cdn.aframe.io/a-painter/images/floor.jpg" position="0 0 0" rotation="-90 0 0" width="20" height="20" repeat="100 100"></a-plane>
-
-      <!-- Create a sky box using the .jpg at the source as the material -->
-      <a-sky src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg"></a-sky>
 
     </a-scene>
   </body>
