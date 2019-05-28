@@ -22,14 +22,16 @@ HelloWorld -- This folder comprises of (currently) two very basic A-Frame scenes
   <li>
 POC_Examples -- This folder comprises of 3 proof of concept scenes for A-Frame functionality. For me they serve as observable measurements for the possibility of the framework. They are basic but serve an important purpose towards my further progression into A-Frame. <strong> Right now they are only supported using full immersion headsets, like the HTC VIVE or Oculus Rift, support for keyboard and mouse will be coming in the future. </strong> There is a linking portal system where the player can move from scene to scene without removing the headset. It starts with index.html where the player can select their first experience. 
   </li>
+  <br>
         <ul> 
           <li> blockBuilder.html - A scene where a the player can create interconnecting boxes and teleport on top of them               </li>
           <li> handThrow.html - A scene where the player can spawn and throw spheres into distant targets. </li>
           <li> sceneChanger.html - A scene where the player can move between three different checkpoints and push buttons to      manipulate the scenery. </li>
-        </ui>
+        </ul>
   <br>
   <li>
   Scripts -- This folder consists of just main.js right now. It used to house physical copies of all the JavaScript Add-on packages but does no longer since they are all linked in the scenes. Main.js exists are the current moment because of it has some physical copies of a few custom-created a-frame components. None of the current scenes use this folder.
   </li>
+</ul>
   
   
