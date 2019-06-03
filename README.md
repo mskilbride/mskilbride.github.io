@@ -2,7 +2,7 @@
 
 This readme is still under construction.
 
-This respository exists to serve as a play area for my experience with A-Frame and a resource to others. In this respository are a few files dedicated for beginners as they demonstrate the basic outline and functionality of A-Frame. There is a folder containing files dedicated towards testing add-in JavaScript components such as the physics system, images, grabbable objects, and creating new geometric entities. POC_Examples hosts proof of concept scenes that show more advanced A-Frame components including environments, physics, player-intitated interactions, scene manipulation, and JavaScript events.
+This repository exists to serve as a play area for my experience with A-Frame and a resource to others. In this respository are a few files dedicated for beginners as they demonstrate the basic outline and functionality of A-Frame. There is a folder containing files dedicated towards testing add-in JavaScript components such as the physics system, images, grabbable objects, and creating new geometric entities. POC_Examples hosts proof of concept scenes that show more advanced A-Frame components including environments, physics, player-intitated interactions, scene manipulation, and JavaScript events.
 
 This is all very much a beginners effort to learn and try to create something exciting. 
 
