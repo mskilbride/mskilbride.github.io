@@ -4,7 +4,7 @@
     <meta charset="utf-8">
       <title>POC Directory</title>
         <meta name="description" content="POC Directory">
-        <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script> <!-- The controllers only have loaded in 0.8.2, not the latest 0.9.0 -->
+        <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script> <!-- The controllers only have loaded in 0.8.2, not the latest 0.9.0 -->
         <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script> <!-- Loads predetermined forest background -->
         <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.3.0/dist/aframe-physics-system.min.js"></script> <!-- Loads the physics system -->
         <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script> <!-- Loads the superhands system -->
@@ -15,16 +15,6 @@
             <a-assets>
               <!-- Texture for the portal -->
               <img id="portal-preview" src="../../assets/dark-honeycomb.png"></img>
-
-              <a-mixin id="touch"
-                physics-collider phase-shift
-                collision-filter="collisionForces: false"
-                static-body="shape: sphere; sphereRadius: 0.02"
-                super-hands="colliderEvent: collisions;
-                             colliderEventProperty: els;
-                             colliderEndEvent: collisions;
-                             colliderEndEventProperty: clearedEls;">
-              </a-mixin>
             </a-assets>
 
             <!-- Environment -->
@@ -74,16 +64,16 @@
           <a-link id="Block_Link" href="blockBuilder.html" title="Block Builder"
               static-body="shape: sphere; sphereRadius: 0.25"
               image="#portal-preview"
-              onmouseover="this.setAttribute('link', {highlighted: true})"
-              onmouseout="this.setAttribute('link', {highlighted: false})"
+              on="click"
+              highlightedColor="#24CAFF"
               position= "0 1.6 2" rotation="0 0 0" scale="0.25 0.25 0.25">
           </a-link>
 
           <a-link id="Scene_Link" href="sceneChanger.html" title="Scene Changer"
               static-body="shape: sphere; sphereRadius: 0.25"
               image="#portal-preview"
-              navigate-on-click="url: https://www.mskilbride.github.io/POC_Examples/mouseExamples/sceneChanger.html"
               on="click"
+              highlightedColor="#24CAFF"
               position= "-1 1.6 2" rotation="0 0 0" scale="0.25 0.25 0.25">
           </a-link>
 
@@ -91,7 +81,7 @@
               static-body="shape: sphere; sphereRadius: 0.25"
               image="#portal-preview"
               on="click"
-              navigate-on-click="url: https://www.mskilbride.github.io/POC_Examples/mouseExamples/handThrow.html"
+              highlightedColor="#24CAFF"
               position= "1 1.6 2" rotation="0 0 0" scale="0.25 0.25 0.25">
           </a-link>
 
