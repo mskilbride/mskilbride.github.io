@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>POC Directory</title>
+        <meta name="description" content="POC Directory">
+        <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script> <!-- The controllers only have loaded in 0.8.2, not the latest 0.9.0 -->
+        <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script> <!-- Loads predetermined forest background -->
+        <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.3.0/dist/aframe-physics-system.min.js"></script> <!-- Loads the physics system -->
+        <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script> <!-- Loads the superhands system -->
+  </head>
+   <body>
+      <a-scene>
+
+            <a-assets>
+              <!-- Texture for the portal -->
+              <img id="portal-preview" src="../assets/dark-honeycomb.png"></img>
+
+              <a-mixin id="touch"
+                physics-collider phase-shift
+                collision-filter="collisionForces: false"
+                static-body="shape: sphere; sphereRadius: 0.02"
+                super-hands="colliderEvent: collisions;
+                             colliderEventProperty: els;
+                             colliderEndEvent: collisions;
+                             colliderEndEventProperty: clearedEls;">
+              </a-mixin>
+            </a-assets>
+
+            <!-- Environment -->
+          <a-entity id="sceneSetting" environment="preset: starry; shadow: true"></a-entity>
+
+          <script>
+            AFRAME.registerComponent('navigate-on-click', {
+              schema: {
+                url: {default: ''}
+              },
+
+              init: function () {
+                var data = this.data;
+                var el = this.el;
+
+                el.addEventListener('click', function () {
+                  window.location.href = data.url;
+                });
+              }
+            });
+          </script>
+
+          <!-- Player -->
+        <a-entity id="Player">
+            <a-entity id="Camera" camera position="0 1.6 0"> </a-entity>
+                  <a-entity id="Cursor"
+                      cursor="downEvents:  ;  fuse:  false;  fuseTimeout:  1000;  upEvents:  "
+                      position="0 0 -1"
+                      geometry="primitive:ring;radiusInner:0.02;radiusOuter:0.03"
+                      material="color:#CCC;shader:flat"
+                      rotation="0 0 0"
+                      scale="1 1 1"
+                      visible="true"
+                      raycaster="">
+                    </a-entity>
+            </a-entity>
+        </a-entity>
+
+        <a-entity text="font: mozillavr; size: 16; align: center; value: Welcome to the directory for my three proof of concept scenes for A-frame.
+                  \n\nIn most scenes your left hand will teleport with the trigger, the right will use the laser to interact with buttons and portals.
+                  \n\nPlease turn around and select a scene!"
+                  position="0 1.6 -2">
+        </a-entity>
+
+          <!-- Clickable Links -->
+
+          <a-link id="Block_Link" href="blockBuilder.html" title="Block Builder"
+              static-body="shape: sphere; sphereRadius: 0.25"
+              image="#portal-preview"
+              onmouseover="this.setAttribute('link', {highlighted: true})"
+              onmouseout="this.setAttribute('link', {highlighted: false})"
+              position= "0 1.6 2" rotation="0 0 0" scale="0.25 0.25 0.25">
+          </a-link>
+
+          <a-link id="Scene_Link" href="sceneChanger.html" title="Scene Changer"
+              static-body="shape: sphere; sphereRadius: 0.25"
+              image="#portal-preview"
+              navigate-on-click="url: https://www.mskilbride.github.io/POC_Examples/mouseExamples/sceneChanger.html"
+              on="click"
+              position= "-1 1.6 2" rotation="0 0 0" scale="0.25 0.25 0.25">
+          </a-link>
+
+          <a-link id="Throw_Link" href="handThrow.html" title="Hand Throw"
+              static-body="shape: sphere; sphereRadius: 0.25"
+              image="#portal-preview"
+              on="click"
+              navigate-on-click="url: https://www.mskilbride.github.io/POC_Examples/mouseExamples/handThrow.html"
+              position= "1 1.6 2" rotation="0 0 0" scale="0.25 0.25 0.25">
+          </a-link>
+
+      </a-scene>
+
+
+
+   </body>
+</html>
