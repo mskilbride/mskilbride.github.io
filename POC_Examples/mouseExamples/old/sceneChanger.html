@@ -8,6 +8,7 @@
     <script src="https://rawgit.com/caseyyee/aframe-ui-widgets/master/dist/aframe-ui-widgets.min.js"></script> <!-- Loads buttons, dials and other widgets -->
     <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script> <!-- Loads predetermined forest background -->
     <script src="https://rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.js"></script> <!-- Loads movement contols, mouse controls, and checkpoint system -->
+    <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
   </head>
   <body>
 
@@ -17,18 +18,17 @@
           <a-mixin id="checkpoint"></a-mixin>
           <a-mixin id="checkpoint-hovered" color="#6CEEB5"></a-mixin>
           <a-mixin id="offset" position="0 0.01 0"></a-mixin>
-          <img id="portal-preview" src="../../assets/dark-honeycomb.png"></img>
+          <img id="portal-preview" src="../assets/dark-honeycomb.png"></img>
         </a-assets>
 
               <!-- Environment -->
         <a-entity id="sceneSetting" environment="preset: contact; shadow: true; ground: hills;"></a-entity>
 
               <!-- Player -->
-              <a-entity id="Player" movement-controls="controls: checkpoint" checkpoint-controls="mode: animate">
-                <a-camera id="Camera" look-controls="pointerLockEnabled: true">
-                  <a-cursor raycaster="objects= #pad1, #pad2, #pad3; far: 5"></a-cursor>
-                </a-camera>
-
+              <a-entity id="Player"  movement-controls="controls: checkpoint" checkpoint-controls="mode: teleport">
+                <a-camera id="Camera"> </a-camera>
+                <a-entity id="lhand" hand-controls="left"></a-entity>
+                <a-entity id="rhand" hand-controls="right" laser-controls raycaster="objects= #pad1, #pad2, #pad3; far: 5"></a-entity>
               </a-entity>
 
 
@@ -57,11 +57,11 @@
                 </a-box>
               </a-entity>
 
-              <a-link id="Return_Link" href="index.html" title="Return"
+              <a-link id="Return_Link" href="..\index.html" title="Return"
                   static-body="shape: sphere; sphereRadius: 0.25"
                   image="#portal-preview"
-                  on="click"
-                  highlightedColor="#24CAFF"
+                  onmouseover="this.setAttribute('link', {highlighted: true})"
+                  onmouseout="this.setAttribute('link', {highlighted: false})"
                   position= ".7 1.6 2" rotation="0 0 0" scale="0.25 0.25 0.25">
               </a-link>
     </a-scene>
@@ -70,7 +70,6 @@
 
       var sceneChange = document.querySelector('#sceneSetting');
       var sceneChange2 = document.querySelector('#sceneSetting');
-      var sceneChange3 = document.querySelector('#sceneSetting');
 
       var environmentUpdate = document.querySelector('#station1_button');
         environmentUpdate.addEventListener('pressed', function () {
@@ -87,14 +86,6 @@
               shadow: 'true',
               });
             });
-
-            var environmentUpdate3 = document.querySelector('#station3_button');
-              environmentUpdate3.addEventListener('pressed', function () {
-                sceneChange3.setAttribute('environment', {
-                    preset: 'forest',
-                    shadow: 'true',
-                    });
-                  });
   </script>
 
     // Setting the cube as the target for button being pressed

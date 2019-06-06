@@ -6,6 +6,8 @@
         <meta name="description" content="POC Directory">
         <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script> <!-- The controllers only have loaded in 0.8.2, not the latest 0.9.0 -->
         <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script> <!-- Loads predetermined forest background -->
+        <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.3.0/dist/aframe-physics-system.min.js"></script> <!-- Loads the physics system -->
+        <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script> <!-- Loads the superhands system -->
   </head>
    <body>
       <a-scene>
@@ -36,14 +38,25 @@
           </script>
 
           <!-- Player -->
-            <a-camera id="Camera" look-controls="pointerLockEnabled: true" position="0 1.6 0">
-              <a-cursor id="Cursor" material="color: white"></a-cursor>
-            </a-camera>
+        <a-entity id="Player">
+            <a-entity id="Camera" camera position="0 1.6 0" look-controls="pointerLockEnabled: true">
+                  <a-entity id="Cursor"
+                      cursor=""
+                      position="0 0 -1"
+                      geometry="primitive:ring;"
+                      material="color:#CCC;shader:flat"
+                      rotation="0 0 0"
+                      scale="1 1 1"
+                      visible="true"
+                      raycaster="">
+                    </a-entity>
+            </a-entity>
+        </a-entity>
 
         <a-entity text="font: mozillavr; size: 16; align: center; value: Welcome to the directory for my three proof of concept scenes for A-frame.
-                  \n\nClick with your mouse on a portal to enter a scene. If on Mobile, fuse interaction should be active.
-                  \n\nPlease understand that these scenes were first developed for a headset and are being coverted to mouse/mobile controls, bugs are expected :)"
-                  position="0 1.6 -1">
+                  \n\nIn most scenes your left hand will teleport with the trigger, the right will use the laser to interact with buttons and portals.
+                  \n\nPlease turn around and select a scene!"
+                  position="0 1.6 -2">
         </a-entity>
 
           <!-- Clickable Links -->

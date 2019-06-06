@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <title>A-Frame Super Hands Component - Pointer Controls</title>
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene environment="preset: forest; shadow: true" avatar-recorder
+             touch-to-click-converter>
+
+      <a-assets>
+        <img id="portals-preview" src="../../assets/dark-honeycomb.png"></img>
+        <a-mixin id="cube" geometry="primitive: box; width: 0.5; height: 0.5; depth: 0.5"
+                 hoverable grabbable stretchable draggable droppable
+                 shadow
+                 event-set__dragdrop="_event: drag-drop; geometry.radius: 0.25; geometry.primitive: sphere"
+                 event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                 event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"
+                 event-set__dragon="_event: dragover-start; material.wireframe: true"
+                 event-set__dragoff="_event: dragover-end; material.wireframe: false">
+        </a-mixin>
+      </a-assets>
+
+      <!-- Original Code -->
+      <!-- <a-entity camera wasd-controls position="0 1 1"
+                capture-mouse
+                raycaster="objects: .cube" cursor="rayOrigin:mouse"
+                static-body="shape: sphere; sphereRadius: 0.001"
+                super-hands="colliderEvent: raycaster-intersection;
+                             colliderEventProperty: els;
+                             colliderEndEvent:raycaster-intersection-cleared;
+                             colliderEndEventProperty: clearedEls;">
+      </a-entity> -->
+
+      <a-entity camera wasd-controls look-controls="pointerLockEnabled: true" position="0 1 1">
+        <a-entity
+                cursor
+                position="0 0 -1"
+                geometry="primitive:ring;radiusInner:0.02;radiusOuter:0.03"
+                material="color: white"
+                raycaster="objects: .cube" cursor="rayOrigin:entity"
+                static-body="shape: sphere; sphereRadius: 0.001"
+                super-hands="colliderEvent: raycaster-intersection;
+                             colliderEventProperty: els;
+                             colliderEndEvent:raycaster-intersection-cleared;
+                             colliderEndEventProperty: clearedEls;"> </a-entity>
+      </a-entity>
+
+      <a-entity class="cube" mixin="cube" position="0 1 -1.25" material="color: red"></a-entity>
+      <a-entity class="cube" mixin="cube" position="0 1.6 -1.5" material="color: red"></a-entity>
+      <a-entity class="cube" mixin="cube" position="-0.9 1 -0.9" material="color: blue"></a-entity>
+      <a-entity class="cube" mixin="cube" position="-1 1.6 -1" material="color: blue"></a-entity>
+      <a-entity class="cube" mixin="cube" position="0.9 1 -0.9" material="color: green"></a-entity>
+      <a-entity class="cube" mixin="cube" position="1 1.6 -1" material="color: green"></a-entity>
+
+      <a-link id="Return_Link" href="index.html" title="Return"
+          static-body="shape: sphere; sphereRadius: 0.25"
+          image="#portal-preview"
+          on="click"
+          highlightedColor="#24CAFF"
+          position= "0 1.6 2" rotation="0 0 0" scale="0.25 0.25 0.25">
+      </a-link>
+
+    </a-scene>
+</html>
