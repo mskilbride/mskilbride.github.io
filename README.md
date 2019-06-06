@@ -20,7 +20,7 @@ HelloWorld -- This folder comprises of (currently) two very basic A-Frame scenes
   </li>
   <br>
   <li>
-POC_Examples -- This folder comprises of 3 proof of concept scenes for A-Frame functionality. For me they serve as observable measurements for the possibility of the framework. They are basic but serve an important purpose towards my further progression into A-Frame. <strong> Right now they are only supported using full immersion headsets, like the HTC VIVE or Oculus Rift, support for keyboard and mouse will be coming in the future. </strong> There is a linking portal system where the player can move from scene to scene without removing the headset. It starts with index.html where the player can select their first experience. 
+POC_Examples -- This folder comprises of 3 proof of concept scenes for A-Frame functionality. For me they serve as observable measurements for the possibility of the framework. They are basic but serve an important purpose towards my further progression into A-Frame. headsetExamples contains scenes with headset support, most of them take advantage of having left and right hands. mouseExamples has the same scenes but ported for computer/mobile. These scenes are buggy, and do have some errors but continue to be a workable jumpoff point. Each set of examples has a workable portal system to enter new scenes from within the environment. It starts with index.html where the player can select their first experience. 
   </li>
   <br>
         <ul> 
